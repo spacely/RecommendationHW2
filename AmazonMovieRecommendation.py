@@ -84,4 +84,6 @@ new=nrecs[['reviewerID','asin','Rating']]
 new['recommendations'] = list(zip(new.asin, new.Rating))
 res=new[['reviewerID','recommendations']]
 res_new=res['recommendations'].groupby([res.reviewerID]).apply(list).reset_index()
-print(res_new)
+review_df = spark.createDataFrame(res_new)
+review_df.show(10)
+##print(res_new)
